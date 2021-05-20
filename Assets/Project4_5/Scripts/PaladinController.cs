@@ -6,6 +6,8 @@ namespace Project4_5.Scripts
     {
         private float gravityAcceleration = 9.81f;
         private float animationConstant = 0.02f;
+        private float amountOfDmg = 40f;
+        private float life = 500f;
     
         [SerializeField]
         private Animator animator;

@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Portfolio8
+namespace Portfolio8.Scripts
 {
     public class ControlDemonAnimation : MonoBehaviour
     {
