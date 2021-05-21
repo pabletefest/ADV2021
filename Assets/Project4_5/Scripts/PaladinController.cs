@@ -28,7 +28,7 @@ namespace Project4_5.Scripts
             VerticalMovement();
             HorizontalMovement();
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
             {
                 Attack();
             }
@@ -56,7 +56,7 @@ namespace Project4_5.Scripts
         {
             float verticalMovement = animator.GetFloat("vertical");
             
-            if (Input.GetKey(KeyCode.I))
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.I))
             {
                 if (verticalMovement < 1f)
                 {
@@ -69,7 +69,7 @@ namespace Project4_5.Scripts
                         animator.SetFloat("vertical", 1f);
                 }
             }
-            else if (Input.GetKey(KeyCode.K))
+            else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.K))
             {
                 if (verticalMovement > -1f)
                 {
@@ -109,7 +109,7 @@ namespace Project4_5.Scripts
         {
             float horizontalMovement = animator.GetFloat("horizontal");
             
-            if (Input.GetKey(KeyCode.L))
+            if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.L))
             {
                 if (horizontalMovement < 1f)
                 {
@@ -122,7 +122,7 @@ namespace Project4_5.Scripts
                         animator.SetFloat("horizontal", 1f);
                 }
             }
-            else if (Input.GetKey(KeyCode.J))
+            else if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.J))
             {
                 if (horizontalMovement > -1f)
                 {
