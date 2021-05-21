@@ -17,12 +17,6 @@ namespace Project4_5.Scripts
             //throw new NotImplementedException();
         }
 
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
-
         // Update is called once per frame
         void Update()
         {

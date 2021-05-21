@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Project4_5.Scripts
 {
@@ -8,6 +10,8 @@ namespace Project4_5.Scripts
         private float animationConstant = 0.02f;
         private float amountOfDmg = 40f;
         private float life = 500f;
+        private bool canHitEnemy;
+        private Collider enemyCollider;
     
         [SerializeField]
         private Animator animator;
@@ -50,6 +54,18 @@ namespace Project4_5.Scripts
             float randomAttack = Random.Range(0, 1f);
             
             animator.SetFloat("attack", randomAttack);
+
+            if (canHitEnemy)
+            {
+                if (enemyCollider)
+                {
+                    enemyCollider.GetComponent<EnemyHealth>().TakeDamage(amountOfDmg);
+                    Debug.Log($"{enemyCollider.tag} getting hit");
+                }
+                
+                enemyCollider = null;
+                canHitEnemy = false;
+            }
         }
 
         private void VerticalMovement()
@@ -156,6 +172,14 @@ namespace Project4_5.Scripts
                         animator.SetFloat("horizontal", 0);
                 }
             }
+        }
+
+        private void OnControllerColliderHit(ControllerColliderHit hit)
+        {
+            canHitEnemy = true;
+            enemyCollider = hit.collider;
+            Debug.Log("Player can hit enemy");
+            Debug.Log($"Player hitting {enemyCollider.tag}");
         }
     }
 }
