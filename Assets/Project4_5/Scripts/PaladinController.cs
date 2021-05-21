@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Project4_5.Scripts
@@ -135,7 +134,7 @@ namespace Project4_5.Scripts
                         animator.SetFloat("horizontal", 1f);
                 }
             }
-            else if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.J))
+            else if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.J))
             {
                 if (horizontalMovement > -1f)
                 {
@@ -202,7 +201,6 @@ namespace Project4_5.Scripts
             GameObject enemy = GameObject.FindGameObjectWithTag(tag);
             enemy.GetComponent<EnemyHealth>().TakeDamage(amountOfDmg);
             Debug.Log($"Enemy hit {tag}");
-        }
-        
+        }  
     }
 }
