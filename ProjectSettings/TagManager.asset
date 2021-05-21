@@ -6,6 +6,14 @@ TagManager:
   tags:
   - Zombie
   - BossMutant
+  - HitPoint
+  - HitPointMutant
+  - HitPointZombie1
+  - HitPointZombie2
+  - HitPointZombie3
+  - BoosMutant
+  - Zombie2
+  - Zombie3
   layers:
   - Default
   - TransparentFX

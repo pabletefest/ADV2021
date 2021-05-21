@@ -10,9 +10,13 @@ namespace Project4_5.Scripts
         private float animationConstant = 0.02f;
         private float amountOfDmg = 40f;
         private float life = 500f;
-        private bool canHitEnemy;
-        private Collider enemyCollider;
-    
+        //private bool canHitEnemy;
+        //private Collider enemyCollider;
+        [SerializeField] private GameObject mutantHitPoint;
+        [SerializeField] private GameObject zombie1HitPoint;
+        [SerializeField] private GameObject zombie2HitPoint;
+        [SerializeField] private GameObject zombie3HitPoint;
+
         [SerializeField]
         private Animator animator;
     
@@ -54,18 +58,11 @@ namespace Project4_5.Scripts
             float randomAttack = Random.Range(0, 1f);
             
             animator.SetFloat("attack", randomAttack);
-
-            if (canHitEnemy)
-            {
-                if (enemyCollider)
-                {
-                    enemyCollider.GetComponent<EnemyHealth>().TakeDamage(amountOfDmg);
-                    Debug.Log($"{enemyCollider.tag} getting hit");
-                }
-                
-                enemyCollider = null;
-                canHitEnemy = false;
-            }
+            
+            string enemyTag = GetNearestEnemyTag();
+            
+            if (enemyTag != "")
+                DamageEnemyByTag(enemyTag);
         }
 
         private void VerticalMovement()
@@ -174,12 +171,38 @@ namespace Project4_5.Scripts
             }
         }
 
-        private void OnControllerColliderHit(ControllerColliderHit hit)
+        private string GetNearestEnemyTag()
         {
-            canHitEnemy = true;
-            enemyCollider = hit.collider;
-            Debug.Log("Player can hit enemy");
-            Debug.Log($"Player hitting {enemyCollider.tag}");
+            if (Vector3.Distance(mutantHitPoint.transform.position, transform.position) < 1f)
+            {
+                Debug.Log("hit BossMutant");
+                return "BossMutant";
+            }
+            else if (Vector3.Distance(zombie1HitPoint.transform.position, transform.position) < 1f)
+            {
+                Debug.Log("hit Zombie1");
+                return "Zombie1";
+            }
+            else if (Vector3.Distance(zombie2HitPoint.transform.position, transform.position) < 1f)
+            {
+                Debug.Log("hit Zombie2");
+                return "Zombie2";
+            }
+            else if (Vector3.Distance(zombie3HitPoint.transform.position, transform.position) < 1f)
+            {
+                Debug.Log("hit Zombie3");
+                return "Zombie3";
+            }
+
+            return "";
         }
+
+        private void DamageEnemyByTag(string tag)
+        {
+            GameObject enemy = GameObject.FindGameObjectWithTag(tag);
+            enemy.GetComponent<EnemyHealth>().TakeDamage(amountOfDmg);
+            Debug.Log($"Enemy hit {tag}");
+        }
+        
     }
 }
